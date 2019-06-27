@@ -16,11 +16,20 @@ import java.util.ArrayList;
 public class JobForm {
 
     @NotNull
-    @Size(min=1, message = "Name may not be empty")
+    @Size(min=1, max=25)
     private String name;
 
-    @NotNull
+    @NotNull(message = "Must select option from drop down menu")
     private int employerId;
+
+    @NotNull
+    private int locationId;
+
+    @NotNull
+    private int coreCompetencyId;
+
+    @NotNull
+    private int positionTypeId;
 
     /*
         TODO #3 - Included other fields needed to create a job,
@@ -42,8 +51,52 @@ public class JobForm {
         */
 
         employers = jobData.getEmployers().findAll();
+        locations = jobData.getLocations().findAll();
+        coreCompetencies = jobData.getCoreCompetencies().findAll();
+        positionTypes = jobData.getPositionTypes().findAll();
 
     }
+
+    public Employer getEmployerName(int id){
+        for(Employer employer : employers){
+            if(id == employer.getId()){
+                return employer;
+            }
+        }
+
+        return null;
+    }
+
+    public Location getLocationName(int id){
+        for(Location location : locations){
+            if(id == location.getId()){
+                return location;
+            }
+        }
+
+        return null;
+    }
+
+    public PositionType getPositionName(int id){
+        for(PositionType position : positionTypes){
+            if(id == position.getId()){
+                return position;
+            }
+        }
+
+        return null;
+    }
+
+    public CoreCompetency getSkillName(int id){
+        for(CoreCompetency skill :  coreCompetencies){
+            if(id == skill.getId()){
+                return skill;
+            }
+        }
+
+        return null;
+    }
+
 
     public String getName() {
         return name;
@@ -53,6 +106,8 @@ public class JobForm {
         this.name = name;
     }
 
+    //ID getter and setters
+
     public int getEmployerId() {
         return employerId;
     }
@@ -60,6 +115,33 @@ public class JobForm {
     public void setEmployerId(int employerId) {
         this.employerId = employerId;
     }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public int getCoreCompetencyId() {
+        return coreCompetencyId;
+    }
+
+    public void setCoreCompetencyId(int coreCompetencyId) {
+        this.coreCompetencyId = coreCompetencyId;
+    }
+
+    public int getPositionTypeId() {
+        return positionTypeId;
+    }
+
+    public void setPositionTypeId(int positionTypeId) {
+        this.positionTypeId = positionTypeId;
+    }
+
+
+    //arrayList getters and setters
 
     public ArrayList<Employer> getEmployers() {
         return employers;
